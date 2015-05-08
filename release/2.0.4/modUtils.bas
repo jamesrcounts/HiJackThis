@@ -20,29 +20,6 @@ Public Function NormalizePath$(sFile$)
     Dim EnvVar As String
     Dim RealEnvVar As String
     
-    If False Then
-    Dim EnvRegExp As RegExp
-    Dim ObjMatch As Match
-    Dim ObjMatches As MatchCollection
-    'Dim EnvVar As String
-    
-    Set EnvRegExp = New RegExp
-    EnvRegExp.Pattern = "%[\w_-]+%"
-    EnvRegExp.IgnoreCase = True
-    EnvRegExp.Global = True
-    
-    If EnvRegExp.Test(sFile) = True Then
-        Set ObjMatches = EnvRegExp.Execute(sFile)
-        For Each ObjMatch In ObjMatches
-            EnvVar = Replace(ObjMatch.Value, "%", "", , , vbTextCompare)
-            If Len(Environ$(EnvVar)) > 0 Then
-                sFile = Replace(sFile, ObjMatch.Value, Environ$(EnvVar), , , vbTextCompare)
-            End If
-        Next
-    End If
-    End If
-    
-'If False Then
     sBegin = 1
     Do
         sValue = InStr(sBegin, sFile, "%", vbTextCompare)
@@ -67,7 +44,6 @@ Public Function NormalizePath$(sFile$)
         End If
         
     Loop While True
-    'End If
     NormalizePath = sFile
 End Function
 
